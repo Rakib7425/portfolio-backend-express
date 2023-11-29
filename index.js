@@ -9,7 +9,7 @@ dotenv.config({
 
 // Code for run server anyTime
 const getUsers = async () => {
-	await fetch("https://portfolio-backend-gwo5.onrender.com//api/v1/projects/getprojects");
+	await fetch("https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects");
 	return;
 };
 
