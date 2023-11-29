@@ -15,7 +15,7 @@ const getUsers = async () => {
 
 setInterval(() => {
 	getUsers();
-}, 1500000);
+}, 10000);
 
 const PORT = process.env.PORT || 8080;
 
