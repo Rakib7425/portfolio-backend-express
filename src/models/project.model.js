@@ -22,7 +22,7 @@ const projectPost = new Schema(
 			default: [],
 		},
 
-		subject: {
+		category: {
 			type: String,
 			required: true,
 		},

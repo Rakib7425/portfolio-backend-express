@@ -6,12 +6,12 @@ import { Project } from "../models/project.model.js";
 
 const addProject = asyncHandler(async (req, res) => {
 	//Extract field from body
-	const { title, hostedLink, gitHubLink, technologies, description, subject, challenges } =
+	const { title, hostedLink, gitHubLink, technologies, description, category, challenges } =
 		req.body;
 
 	// Check if empty
 	if (
-		[title, hostedLink, gitHubLink, technologies, description, subject, challenges].some(
+		[title, hostedLink, gitHubLink, technologies, description, category, challenges].some(
 			(field) => !field?.trim()
 		)
 	) {
@@ -43,7 +43,7 @@ const addProject = asyncHandler(async (req, res) => {
 		images: newPosterUrls,
 		technologies: technologies.split(","),
 		description,
-		subject,
+		category,
 		challenges,
 	});
 
@@ -59,10 +59,10 @@ const addProject = asyncHandler(async (req, res) => {
 const updateProject = asyncHandler(async (req, res) => {
 	const _id = req.query.id;
 
-	const { title, hostedLink, gitHubLink, technologies, description, subject, challenges } =
+	const { title, hostedLink, gitHubLink, technologies, description, category, challenges } =
 		req.body;
 	if (
-		[_id, title, hostedLink, gitHubLink, technologies, description, subject, challenges].some(
+		[_id, title, hostedLink, gitHubLink, technologies, description, category, challenges].some(
 			(field) => !field?.trim()
 		)
 	) {
@@ -89,7 +89,7 @@ const updateProject = asyncHandler(async (req, res) => {
 				gitHubLink,
 				technologies,
 				description,
-				subject,
+				category,
 				challenges,
 			},
 			{ new: true } // Ensure you get the updated document in the response
@@ -114,7 +114,7 @@ const updateProject = asyncHandler(async (req, res) => {
 				images: newPosterUrls,
 				technologies: technologies.split(","),
 				description,
-				subject,
+				category,
 				challenges,
 			},
 			{ new: true } // Ensure you get the updated document in the response
