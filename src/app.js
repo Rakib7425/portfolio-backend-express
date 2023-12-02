@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 //routes import
 import adminRouter from "./routes/admin.routes.js";
 import projectRouter from "./routes/project.routes.js";
+import aboutMeRouter from "./routes/aboutMe.routes.js";
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(cookieParser());
 const apiVersion = "v1";
 app.use(`/api/${apiVersion}/admins`, adminRouter);
 app.use(`/api/${apiVersion}/projects`, projectRouter);
+app.use(`/api/${apiVersion}/aboutme`, aboutMeRouter);
 
 export default app;

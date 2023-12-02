@@ -118,7 +118,7 @@ const addContactMe = asyncHandler(async (req, res) => {
 
 const getContactMe = asyncHandler(async (req, res) => {
 	const data = await ContactMe.find({});
-	return res.status(201).json(new ApiResponse(201, true, "All form fetched successfully!", data));
+	return res.status(200).json(new ApiResponse(200, true, "All form fetched successfully!", data));
 });
 
 export { registerAdmin, loginAdmin, addContactMe, getContactMe };
