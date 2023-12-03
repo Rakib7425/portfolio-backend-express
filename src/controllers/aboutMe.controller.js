@@ -58,4 +58,19 @@ const updateAboutMe = asyncHandler(async (req, res) => {
 	}
 });
 
-export { AddAboutMe, updateAboutMe };
+/* Add a new tech stack to an existing AboutMe entry in the database. */
+const addAboutMeTechStack = asyncHandler(async (req, res) => {
+	const { techStack, _id } = req.body;
+	const data = await AboutMe.findById(_id);
+	if (!data) {
+		throw new ApiError(404, "AboutMe entry not found");
+	}
+	data.techStack.push(techStack);
+	const dbRes = await data.save();
+
+	return res
+		.status(200)
+		.json(new ApiResponse(200, true, "Tech Stack added successfully !!", dbRes));
+});
+
+export { AddAboutMe, updateAboutMe, addAboutMeTechStack };
