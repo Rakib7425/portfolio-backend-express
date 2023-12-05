@@ -8,6 +8,7 @@ const AddAboutMe = asyncHandler(async (req, res) => {
 	// Extract data from the request body
 	const { name, email, currentAddress, currentlyLearning, workHistory, techStack, description } =
 		req.body;
+
 	const profilePhoto = await uploadOnCloudinary(req.file.path);
 
 	const newAboutMe = new AboutMe({
