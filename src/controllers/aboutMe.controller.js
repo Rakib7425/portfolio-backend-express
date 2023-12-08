@@ -75,4 +75,15 @@ const addAboutMeTechStack = asyncHandler(async (req, res) => {
 		.json(new ApiResponse(200, true, "Tech Stack added successfully !!", dbRes));
 });
 
-export { AddAboutMe, updateAboutMe, addAboutMeTechStack };
+/* The `getAboutMe` function is an asynchronous handler that is used to fetch the latest AboutMe entry
+from the database. */
+const getAboutMe = asyncHandler(async (req, res) => {
+	const dbRes = await AboutMe.find({});
+	if (!dbRes) {
+		throw new ApiError(404, "AboutMe entry not found");
+	}
+	const data = dbRes[dbRes.length - 1];
+	return res.status(200).json(new ApiResponse(200, true, "Data fetched successfully !!", data));
+});
+
+export { AddAboutMe, updateAboutMe, addAboutMeTechStack, getAboutMe };
