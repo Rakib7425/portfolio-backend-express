@@ -5,7 +5,6 @@ const AboutMeSchema = new Schema(
 		name: {
 			type: String,
 			required: [true, "Name is required"],
-			lowercase: true,
 			trim: true,
 			index: true,
 		},

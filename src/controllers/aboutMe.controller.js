@@ -32,9 +32,14 @@ const updateAboutMe = asyncHandler(async (req, res) => {
 	const { name, email, currentAddress, currentlyLearning, workHistory, techStack, description } =
 		req.body;
 
-	// Find the existing about me entry by name
-	const existingAboutMe = await AboutMe.findOne({ name });
-	const profilePhoto = await uploadOnCloudinary(req.file.path);
+	// Find the existing about me entry
+	const dbRes = await AboutMe.find({});
+	if (!dbRes) {
+		throw new ApiError(404, "AboutMe entry not found");
+	}
+
+	const existingAboutMe = dbRes[dbRes.length - 1];
+	const profilePhoto = await uploadOnCloudinary(req.file?.path || "");
 
 	// Update the fields if they exist in the request body
 	if (existingAboutMe) {
