@@ -15,7 +15,7 @@ const getUsers = async () => {
 
 setInterval(() => {
 	getUsers();
-}, 600000);
+}, 30_00_00); // call after every 5min. for server up & run anytime in render
 
 const PORT = process.env.PORT || 8080;
 
