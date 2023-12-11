@@ -34,6 +34,7 @@ const updateAboutMe = asyncHandler(async (req, res) => {
 
 	// Find the existing about me entry
 	const dbRes = await AboutMe.find({});
+
 	if (!dbRes) {
 		throw new ApiError(404, "AboutMe entry not found");
 	}
@@ -66,9 +67,15 @@ const updateAboutMe = asyncHandler(async (req, res) => {
 
 /* Add a new tech stack to an existing AboutMe entry in the database. */
 const addAboutMeTechStack = asyncHandler(async (req, res) => {
-	const { techStack, _id } = req.body;
+	// const { techStack, _id } = req.body;
+	const { techStack } = req.body;
 
-	const data = await AboutMe.findById(_id);
+	// const data = await AboutMe.findById(_id);
+	const findLastData = await AboutMe.find({});
+	if (!findLastData) {
+		throw new ApiError(404, "AboutMe entry not found");
+	}
+	const data = findLastData[findLastData.length - 1];
 	if (!data) {
 		throw new ApiError(404, "AboutMe entry not found");
 	}
