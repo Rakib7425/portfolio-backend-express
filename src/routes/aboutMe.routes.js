@@ -12,7 +12,7 @@ const aboutMeRouter = Router();
 
 aboutMeRouter.route("/").post(saveToLocal.single("profilePhoto"), AddAboutMe);
 aboutMeRouter.route("/").patch(saveToLocal.single("profilePhoto"), updateAboutMe);
-aboutMeRouter.route("/").put(addAboutMeTechStack);
+aboutMeRouter.route("/").put(saveToLocal.single("techPhoto"), addAboutMeTechStack);
 aboutMeRouter.route("/").get(getAboutMe);
 
 export default aboutMeRouter;

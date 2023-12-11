@@ -68,7 +68,14 @@ const updateAboutMe = asyncHandler(async (req, res) => {
 /* Add a new tech stack to an existing AboutMe entry in the database. */
 const addAboutMeTechStack = asyncHandler(async (req, res) => {
 	// const { techStack, _id } = req.body;
-	const { techStack } = req.body;
+
+	let techStack;
+	if (req.file) {
+		const response = await uploadOnCloudinary(req.file?.path);
+		techStack = response.secure_url;
+	} else {
+		techStack = req.body.techStack;
+	}
 
 	// const data = await AboutMe.findById(_id);
 	const findLastData = await AboutMe.find({});
@@ -79,7 +86,9 @@ const addAboutMeTechStack = asyncHandler(async (req, res) => {
 	if (!data) {
 		throw new ApiError(404, "AboutMe entry not found");
 	}
+
 	data.techStack.push(techStack);
+
 	const dbRes = await data.save();
 
 	return res
