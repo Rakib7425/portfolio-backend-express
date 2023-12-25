@@ -71,21 +71,17 @@ const loginAdmin = asyncHandler(async (req, res) => {
 		$or: [{ username: identifier }, { email: identifier }],
 	});
 
-	if (user) {
-		const isPasswordCorrect = await user.isPasswordCorrect(password);
-
-		if (!isPasswordCorrect) {
-			return res.status(401).json(new ApiResponse(401, false, "Incorrect password!", ""));
-		}
-
-		return res.status(200).json(new ApiResponse(200, true, "Successfully logged in!", user));
-	}
-
 	if (!user) {
-		return res
-			.status(404)
-			.json(new ApiResponse(404, false, "Invalid username or email. No user found!", ""));
+		throw new ApiError(404, "No user found or invalid credentials!");
 	}
+
+	const isPasswordCorrect = await user.isPasswordCorrect(password);
+
+	if (!isPasswordCorrect) {
+		throw new ApiError(401, "Incorrect password!");
+	}
+
+	return res.status(200).json(new ApiResponse(200, true, "Successfully logged in!", user));
 });
 
 const addContactMe = asyncHandler(async (req, res) => {

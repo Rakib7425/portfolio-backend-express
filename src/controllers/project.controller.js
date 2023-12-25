@@ -152,7 +152,7 @@ const deleteProject = asyncHandler(async (req, res) => {
 	}
 });
 
-const getProjects = asyncHandler(async (req, res) => {
+const getProjects = asyncHandler(async (_, res) => {
 	const data = await Project.find({ isDeleted: false });
 
 	if (!data) {

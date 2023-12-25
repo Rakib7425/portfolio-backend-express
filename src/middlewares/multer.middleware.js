@@ -5,9 +5,9 @@ const storage = multer.diskStorage({
 		cb(null, "./public/temp");
 	},
 	filename: function (req, file, cb) {
-		const postfix = Math.random() * 100 + 1;
-		// _${postfix}
-		cb(null, `${file.originalname}_${postfix}`);
+		const prefix = Math.random() * 100 + 1;
+		// _${prefix}
+		cb(null, `${prefix}_${file.originalname}`);
 	},
 });
 
