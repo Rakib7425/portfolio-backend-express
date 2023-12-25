@@ -30,16 +30,7 @@ router.route("/updateproject").patch(
 	updateProject
 );
 
-router.route("/deleteproject").delete(
-	saveToLocal.fields([
-		{
-			name: "images",
-			maxCount: 3,
-		},
-	]),
-	deleteProject
-);
-
+router.route("/deleteproject").delete(deleteProject);
 router.route("/getprojects").get(getProjects);
 router.route("/getproject/:id").get(getProjectById);
 

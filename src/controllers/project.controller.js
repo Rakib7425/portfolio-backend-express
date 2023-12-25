@@ -96,14 +96,11 @@ const updateProject = asyncHandler(async (req, res) => {
 		).select("-password -refreshToken");
 
 		if (!response) {
-			return res
-				.status(404)
-				.json(new ApiResponse(404, false, `Project not found with id ${_id}`, ""));
-		} else {
-			return res
-				.status(200)
-				.json(new ApiResponse(200, true, "Project updated successfully", response));
+			throw new ApiError(404, `Project not found with id ${_id}`);
 		}
+		return res
+			.status(200)
+			.json(new ApiResponse(200, true, "Project updated successfully", response));
 	} else {
 		const updatedProject = await Project.findByIdAndUpdate(
 			{ _id: _id },
@@ -121,14 +118,12 @@ const updateProject = asyncHandler(async (req, res) => {
 		).select("-password -refreshToken");
 
 		if (!updatedProject) {
-			return res
-				.status(404)
-				.json(new ApiResponse(404, false, `Project not found with id ${_id}`, ""));
-		} else {
-			return res
-				.status(200)
-				.json(new ApiResponse(200, true, "Project updated successfully", updatedProject));
+			throw new ApiError(404, `Project not found with id ${_id}`);
 		}
+
+		return res
+			.status(200)
+			.json(new ApiResponse(200, true, "Project updated successfully", updatedProject));
 	}
 });
 
@@ -142,26 +137,22 @@ const deleteProject = asyncHandler(async (req, res) => {
 	);
 
 	if (!deletedData) {
-		return res
-			.status(404)
-			.json(new ApiResponse(404, false, `Project not found with id ${id}`, ""));
-	} else {
-		return res
-			.status(200)
-			.json(new ApiResponse(200, true, "Project Deleted successfully", deletedData));
+		throw new ApiError(404, `Project not found with id ${id}`);
 	}
+
+	return res
+		.status(200)
+		.json(new ApiResponse(200, true, "Project Deleted successfully", deletedData));
 });
 
 const getProjects = asyncHandler(async (_, res) => {
 	const data = await Project.find({ isDeleted: false });
 
 	if (!data) {
-		return res.status(404).json(new ApiResponse(404, false, `Project not found`, ""));
-	} else {
-		return res
-			.status(200)
-			.json(new ApiResponse(200, true, "Projects fetched successfully", data));
+		throw new ApiError(404, `Projects not found!`);
 	}
+
+	return res.status(200).json(new ApiResponse(200, true, "Projects fetched successfully", data));
 });
 
 const getProjectById = asyncHandler(async (req, res) => {
@@ -170,14 +161,10 @@ const getProjectById = asyncHandler(async (req, res) => {
 	const data = await Project.find({ _id: projectId });
 
 	if (!data) {
-		return res
-			.status(404)
-			.json(new ApiResponse(404, false, `Project not found with id ${projectId}`, ""));
-	} else {
-		return res
-			.status(200)
-			.json(new ApiResponse(200, true, "Project Fetched successfully", data));
+		throw new ApiError(404, `Project not found with id ${projectId}`);
 	}
+
+	return res.status(200).json(new ApiResponse(200, true, "Project Fetched successfully", data));
 });
 
 export { addProject, updateProject, deleteProject, getProjects, getProjectById };

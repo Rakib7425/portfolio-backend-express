@@ -49,6 +49,10 @@ const registerAdmin = asyncHandler(async (req, res) => {
 		password,
 	});
 
+	if (!user) {
+		throw new ApiError(500, "Something went wrong while Creating the user");
+	}
+
 	const createdUser = await Admin.findById(user._id).select("-password -refreshToken");
 
 	if (!createdUser) {
