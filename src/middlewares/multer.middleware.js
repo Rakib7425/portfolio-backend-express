@@ -6,8 +6,8 @@ const storage = multer.diskStorage({
 	},
 	filename: function (req, file, cb) {
 		const prefix = Date.now();
-		// _${prefix}
 		cb(null, `${prefix}_${file.originalname}`);
+		// cb(null, `${file.originalname}`);
 	},
 });
 

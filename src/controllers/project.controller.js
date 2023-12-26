@@ -66,7 +66,7 @@ const updateProject = asyncHandler(async (req, res) => {
 			(field) => !field?.trim()
 		)
 	) {
-		throw new ApiError(400, "All fields are required");
+		throw new ApiError(400, "All fields are required!!");
 	}
 
 	let localImagesPath = [];
@@ -77,8 +77,11 @@ const updateProject = asyncHandler(async (req, res) => {
 			localImagesPath.push(req.files.images[index].path);
 			let cloudinaryResponse = await uploadOnCloudinary(localImagesPath[index]);
 			newPosterUrls.push(cloudinaryResponse.secure_url);
+			// console.log(cloudinaryResponse);
 		}
 	}
+
+	// console.log(newPosterUrls);
 
 	if (localImagesPath.length < 1) {
 		const response = await Project.findByIdAndUpdate(
@@ -92,7 +95,7 @@ const updateProject = asyncHandler(async (req, res) => {
 				category,
 				challenges,
 			},
-			{ new: true } // Ensure you get the updated document in the response
+			{ new: true } // Ensure the updated document in the response
 		).select("-password -refreshToken");
 
 		if (!response) {
