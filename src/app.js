@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-//routes import
+
+// import routes
 import adminRouter from "./routes/admin.routes.js";
 import projectRouter from "./routes/project.routes.js";
 import aboutMeRouter from "./routes/aboutMe.routes.js";
