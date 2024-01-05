@@ -14,7 +14,7 @@ const getUsers = async () => {
 
 setInterval(() => {
 	getUsers();
-}, 600000); // call after every 10min. for server up & run anytime in render
+}, 500000); // call after every 10min. for server up & run anytime in render
 
 const PORT = process.env.PORT || 8080;
 
