@@ -1,14 +1,27 @@
 import dotenv from "dotenv";
 import connectDB from "./src/db/index.js";
 import app from "./src/app.js";
+import request from "request";
 
 dotenv.config({
 	path: "./.env",
 });
 
 // Code for run server anyTime
-const getUsers = async () => {
-	await fetch("https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects");
+const getUsers = () => {
+	// await fetch("https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects");
+
+	const options = {
+		method: "GET",
+		url: "https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects",
+	};
+
+	request(options, function (error, response, body) {
+		if (error) throw new Error(error);
+
+		console.log(body);
+	});
+
 	return;
 };
 
