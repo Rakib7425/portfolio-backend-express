@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import connectDB from "./src/db/index.js";
 import app from "./src/app.js";
-import request from "request";
+import fetch from "node-fetch";
 
 dotenv.config({
 	path: "./.env",
@@ -9,18 +9,13 @@ dotenv.config({
 
 // Code for run server anyTime
 const getUsers = () => {
-	// await fetch("https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects");
+	let url = "https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects";
+	let options = { method: "GET" };
 
-	const options = {
-		method: "GET",
-		url: "https://portfolio-backend-gwo5.onrender.com/api/v1/projects/getprojects",
-	};
-
-	request(options, function (error, response, body) {
-		if (error) throw new Error(error);
-
-		console.log(body);
-	});
+	fetch(url, options)
+		.then((res) => res.json())
+		.then((json) => console.log(json))
+		.catch((err) => console.error("error:" + err));
 
 	return;
 };
