@@ -3,9 +3,7 @@ import connectDB from "./src/db/index.js";
 import app from "./src/app.js";
 import fetch from "node-fetch";
 
-dotenv.config({
-	path: "./.env",
-});
+dotenv.config({ path: "./.env" });
 
 // Code for run server anyTime
 const getUsers = () => {
