@@ -14,7 +14,7 @@ const getUsers = () => {
 
 	fetch(url, options)
 		.then((res) => res.json())
-		.then((json) => console.log(json))
+		.then((json) => console.log("All functions are working fine!"))
 		.catch((err) => console.error("error:" + err));
 
 	return;
