@@ -22,8 +22,7 @@ const getUsers = () => {
 setInterval(() => {
 	getUsers();
 
-	// call after every 8min. for server up & run anytime in render
-}, 480000);
+}, 480000);// call after every 8min. for server up & run anytime in render
 
 const PORT = process.env.PORT || 8080;
 
