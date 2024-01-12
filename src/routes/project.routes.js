@@ -9,7 +9,7 @@ import {
 } from "../controllers/project.controller.js";
 const router = Router();
 
-//
+
 router.route("/addproject").post(
 	saveToLocal.fields([
 		{
