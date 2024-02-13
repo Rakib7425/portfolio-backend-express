@@ -67,7 +67,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
 /* Handling the loginAdmin functionality of a Admin. It takes in the
 `req` (request) and `res` (response) objects as parameters. */
 const loginAdmin = asyncHandler(async (req, res) => {
-	//
+
 	const identifier = req.body.identifier; // loginAdmin with username or email
 	const password = req.body.password;
 
