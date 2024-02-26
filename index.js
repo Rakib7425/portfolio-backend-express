@@ -13,7 +13,15 @@ const getUsers = () => {
 
 	fetch(url, options)
 		.then((res) => res.json())
-		.then((json) => console.log("All functions are working fine!"))
+		.then((json) => console.log("All functions are working fine urlForPortfolio!"))
+		.catch((err) => console.error("error:" + err));
+
+	let urlForMaxlenceAssignment = "https://maxlence-assignment.onrender.com/api/user";
+	let optionsForMaxlenceAssignment = { method: "GET" };
+
+	fetch(urlForMaxlenceAssignment, optionsForMaxlenceAssignment)
+		.then((res) => res.json())
+		.then((json) => console.log("All functions are working fine ForMaxlenceAssignment!"))
 		.catch((err) => console.error("error:" + err));
 
 	return;
